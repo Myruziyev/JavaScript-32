@@ -1,0 +1,280 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  color: inherit;
+  list-style: none;
+  font-family: sans-serif;
+  text-decoration: none;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  justify-content: center;
+  background: url("https://png.pngtree.com/background/20230616/original/pngtree-abstract-neon-background-in-shades-of-pink-violet-and-blue-in-picture-image_3652218.jpg");
+  background-size: cover;
+  background-position: center;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.container {
+  position: relative;
+  width: 400px;
+  height: 100px;
+  padding: 20px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(30px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  transition: height 0.6s ease;
+}
+.search-box {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 55px;
+}
+.search-box i {
+  position: absolute;
+  left: 10px;
+  font-size: 28px;
+}
+.search-box input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  outline: none;
+  font-size: 10px;
+  border-radius: 10px;
+  font-size: 22px;
+  color: #fff;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 0px 48px 0px 42px;
+}
+.search-box input::placeholder {
+  color: #fff;
+  text-transform: capitalize;
+}
+.search-box button {
+  position: absolute;
+  right: 0;
+  width: 40px;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: 28px;
+  color: #fff;
+  cursor: pointer;
+  padding: 0px 40px 0px 5px;
+}
+
+.weather-box {
+  text-align: center;
+  margin: 40px 0px;
+}
+
+.weather-box img {
+  width: 60%;
+}
+
+.weather-box,
+.weather-details,
+.not-found {
+  visibility: hidden;
+  overflow: hidden;
+}
+
+.weather-box.active,
+.weather-details.active,
+.not-found.active {
+  visibility: visible;
+}
+
+.weather-box .box,
+.not-found .box {
+  transform: translateY(-100%);
+}
+.weather-box.active .box,
+.not-found.active .box {
+  transform: translateY(0%);
+  transition: transform 1s ease;
+  transition-delay: 0.6s;
+}
+
+.weather-box .temperature {
+  position: relative;
+  font-size: 64px;
+  line-height: 1;
+  font-weight: 700;
+  margin: 20px 0px 6px -30px;
+}
+
+.weather-box .temperature span {
+  position: absolute;
+  font-size: 24px;
+  margin-left: 4px;
+}
+
+.weather-box .description {
+  font-size: 22px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.weather-details {
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  padding: 0px 20px;
+}
+
+.weather-details .humidity,
+.weather-details .wind {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  transform: translateY(-100%);
+}
+
+.weather-details.active .humidity,
+.weather-details.active .wind {
+  transform: translateY(0%);
+  transition: transform 1s ease;
+  transition-delay: 0.6s;
+}
+
+.weather-details .humidity .info-humidity,
+.weather-details .wind .info-wind {
+  transform: translateY(-100%);
+  overflow: hidden;
+}
+
+.weather-box .box .info-weather {
+  transform: translateY(-120%);
+}
+
+.container.active .weather-box .box .info-weather,
+.container.active .weather-details .humidity .info-humidity,
+.container.active .weather-details .wind .info-wind {
+  transform: translateY(0%);
+  transition: transform 1s ease;
+}
+
+.weather-details .humidity {
+  padding-left: 20px;
+  justify-content: flex-start;
+}
+
+.weather-details .wind {
+  justify-content: flex-end;
+  padding-right: 20px;
+}
+.weather-details i {
+  font-size: 56px;
+  margin-right: 10px;
+}
+
+.weather-details span {
+  display: inline-block;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.weather-details p {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.not-found {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  margin-top: 110px;
+}
+
+.not-found img {
+  width: 65%;
+}
+
+.not-found p {
+  font-size: 22px;
+  margin-top: 12px;
+  font-weight: 500;
+}
+
+.city-hide {
+  display: none;
+}
+
+#clone-info-weather,
+#clone-info-humidity,
+#clone-info-wind {
+  position: absolute;
+  transform: translateY(-100%);
+}
+
+#clone-info-weather .weather {
+  transform: translateY(120%);
+  transition: transform 1s ease, opacity 0s;
+  transition-delay: 0s, 2s;
+}
+
+.weather-box:not(.active) #clone-info-weather .weather {
+  opacity: 0;
+  transition-delay: 0s;
+}
+
+.active-clone#clone-info-weather .weather {
+  transform: translateY(0%);
+}
+
+#clone-info-humidity span,
+#clone-info-wind span {
+  transform: translateY(100%);
+  transition: transform 1s ease;
+}
+
+.active-clone#clone-info-humidity span,
+.active-clone#clone-info-wind span {
+  transform: translateY(0%);
+}
+
+/* Telefon ekranlari uchun moslashgan CSS */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+    font-size: 90%;
+  }
+  header,
+  footer {
+    text-align: center;
+  }
+  .container {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .icon {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+  }
+  .content {
+    padding: 10px;
+  }
+  .text-large {
+    font-size: 1.2em;
+  }
+}
